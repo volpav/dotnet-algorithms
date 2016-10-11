@@ -1,4 +1,4 @@
-# Algorithms and Data Structures
+# Algorithms and Data Structures (written in C#)
 
 This repository contains a collection of algorithms and data structures written in C# and primarily aimed for use in competitive programming.
 
