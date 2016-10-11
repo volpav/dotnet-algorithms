@@ -4,7 +4,7 @@ This repository contains a collection of algorithms and data structures written 
 
 This repository contains:
 
-- High-performance input/output (taken from [Kattis website](https://open.kattis.com/help/csharp));
+- High-performance input/output facade (taken from [Kattis website](https://open.kattis.com/help/csharp));
 - Graphs:
   - Convenient way of initializing (directed/undirected, weighted/unweighted) graph as:
     - Vertex set;
