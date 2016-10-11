@@ -2,7 +2,7 @@
 
 This repository contains a collection of algorithms and data structures written in C# and primarily aimed for use in competitive programming.
 
-The contents of the repository are the following:
+This repository contains:
 
 - High-performance input/output (taken from [Kattis website](https://open.kattis.com/help/csharp));
 - Graphs:
@@ -19,11 +19,11 @@ The contents of the repository are the following:
 
 It's as easy as "1-2-3":
 
-1. Clone `master` branch of this repository;
+1. Clone `master` branch;
 2. Make the changes you want;
 3. Create a [Pull Request](https://github.com/volpav/dotnet-algorithms/pulls);
 
-I appreciate every effort, whether that is fixing bugs, improving existing algorithms' performance, adding more convenient interfaces, contributing new algorithms or simply altering documentation. 
+I appreciate every effort, whether that is fixing bugs, improving existing algorithms' performance, adding more convenient interfaces, contributing new algorithms or just improving documentation. 
 
 # Feedback
 
