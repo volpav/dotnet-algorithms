@@ -2,6 +2,10 @@
 
 This repository contains a collection of algorithms and data structures written in C# and primarily aimed for use in competitive programming.
 
+[![Build Status](https://travis-ci.org/volpav/dotnet-algorithms.svg?branch=master)](https://travis-ci.org/volpav/dotnet-algorithms)
+
+# Contents
+
 This repository contains (I'm updating this list as I go):
 
 - High-performance input/output facade (taken from [Kattis website](https://open.kattis.com/help/csharp));
