@@ -7,7 +7,8 @@ mono: none
 env: DOTNETCORE=1
 
 script:
-  - cd "dotnet-algorithms/dotnet-algorithms-tests" && pushd "dotnet-algorithms/dotnet-algorithms-tests"
+  - dir
   - dotnet restore
+  - cd dotnet-algorithms-tests && pushd dotnet-algorithms-tests
   - dotnet --verbose test 
   - popd 
