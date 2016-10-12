@@ -1,18 +1,13 @@
 language: csharp
-mono: none
+os: linux
+dist: trusty
+sudo: required
 dotnet: 1.0.0-preview2-003121
-
-matrix:
-  include:
-    - os: linux # Ubuntu 14.04
-      dist: trusty
-      sudo: required
-      dotnet: 1.0.0-preview2-003121
-      mono: none
-      env: DOTNETCORE=1
+mono: none
+env: DOTNETCORE=1
 
 script:
-  - cd "dotnet-algorithms-tests" && pushd "dotnet-algorithms-tests"
+  - cd "dotnet-algorithms/dotnet-algorithms-tests" && pushd "dotnet-algorithms/dotnet-algorithms-tests"
   - dotnet restore
   - dotnet --verbose test 
   - popd 
