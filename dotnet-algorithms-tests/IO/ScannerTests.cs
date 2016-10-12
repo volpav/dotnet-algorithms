@@ -1,13 +1,11 @@
 using System;
-using System.Text;
-using System.IO;
 using Xunit;
 
 using Algorithms.IO;
 
 namespace Tests.IO
 {
-    public class ScannerTests
+    public class ScannerTests : TestBase
     {
         [Fact]
         public void CanReadMultipleTokens()
@@ -76,11 +74,6 @@ namespace Tests.IO
             Assert.True(t4 == double.Parse(tokens[3]));
 
             Assert.True(!scanner.HasNext());
-        }
-
-        private Stream CreateStream(string data)
-        {
-            return new MemoryStream(Encoding.UTF8.GetBytes(data));
         }
     }
 }

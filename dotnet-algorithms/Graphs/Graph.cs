@@ -222,7 +222,7 @@ namespace Algorithms.Graphs
         /// <param name="directed">Value indicating whether the graph is directed.</param>
         /// <param name="weighted">Value indicating whether the graph is weighted.</param>
         /// <returns>A set of vertices.</returns>
-        public static Vertex[] AsObjectList(Scanner scanner, bool directed = false, bool weighted = false)
+        public static Vertex[] AsVertexList(Scanner scanner, bool directed = false, bool weighted = false)
         {
             // Reading out the number of nodes.
             var n = scanner.NextInt();
