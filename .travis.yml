@@ -1,11 +1,6 @@
 language: csharp
-
-matrix:
-  include:
-    - os: linux
-      dist: trusty
-      sudo: required
-      dotnet: 1.0.0
+mono: none
+dotnet: 1.0.0-preview2-003121
 
 script:
   - cd "dotnet-algorithms-tests" && pushd "dotnet-algorithms-tests"
