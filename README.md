@@ -17,7 +17,13 @@ This repository contains (I'm updating this list as I go):
   - Graph traversal algorithms:
     - DFS
       - Using vertex set (iterative + recursive with backtracking);
-      - Using adjacency matrix (iterative + recursive with backtracking); 
+      - Using adjacency matrix (iterative + recursive with backtracking);
+    - BFS
+      - Using vertex set (iterative + recursive with backtracking);
+      - Using adjacency matrix (iterative + recursive with backtracking);
+- Geometry:
+  - Primitives (points, line segments);
+  - Find intersection: line segments;  
 
 # Contributing
 

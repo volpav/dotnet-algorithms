@@ -152,5 +152,147 @@ namespace Tests.Graphs
                 "(3,1),(4,1),(1,0),(5,2),(6,2),(2,0),(0,0)"
             );
         }
+
+        [Fact]
+        public void CanBFSAcyclicGraphAsAdjacencyList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "7 6\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n"
+            ));
+
+            var g = Graph.AsAdjacencyList(scanner, directed: false);
+            var path = new List<int>();
+
+            GraphTraversal.BFS(g, 0, (node) => path.Add(node));
+
+            Assert.True(path.Count == 7);
+
+            Assert.True(
+                string.Join(",", path.Select(x => x.ToString())) ==
+                "0,1,2,3,4,5,6"
+            );
+        }
+
+        [Fact]
+        public void CanBFSCyclicGraphAsAdjacencyList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "3 3\n1 2\n1 3\n2 3"
+            ));
+
+            var g = Graph.AsAdjacencyList(scanner, directed: false);
+            var path = new List<int>();
+
+            GraphTraversal.BFS(g, 0, (node) => path.Add(node));
+
+            Assert.True(path.Count == 3);
+
+            Assert.True(
+                string.Join(",", path.Select(x => x.ToString())) ==
+                "0,1,2"
+            );
+        }
+
+        [Fact]
+        public void CanBFSAcyclicGraphWithBacktrackingAsAdjacencyList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "7 6\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n"
+            ));
+
+            var g = Graph.AsAdjacencyList(scanner, directed: false);
+            var path = new List<Tuple<int, int>>();
+            var explored = new List<Tuple<int, int>>();
+
+            GraphTraversal.BFS(g, 0, 
+                (node, parent) => path.Add(new Tuple<int, int>(node, parent)), 
+                (node, parent) => explored.Add(new Tuple<int, int>(node, parent))
+            );
+
+            Assert.True(path.Count == 7);
+
+            Assert.True(
+                string.Join(",", path.Select(x => string.Format("({0},{1})", x.Item1, x.Item2))) ==
+                "(0,0),(1,1),(2,1),(3,3),(4,3),(5,4),(6,5)"
+            );
+
+            Assert.True(explored.Count == 3);
+
+            Assert.True(
+                string.Join(",", explored.Select(x => string.Format("({0},{1})", x.Item1, x.Item2))) ==
+                "(0,0),(2,2),(6,6)"
+            );
+        }
+
+        [Fact]
+        public void CanBFSAcyclicGraphAsVertexList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "7 6\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n"
+            ));
+
+            var g = Graph.AsVertexList(scanner, directed: false);
+            var path = new List<int>();
+
+            GraphTraversal.BFS(g, g[0], (node) => path.Add(node.Index));
+
+            Assert.True(path.Count == 7);
+
+            Assert.True(
+                string.Join(",", path.Select(x => x.ToString())) ==
+                "0,1,2,3,4,5,6"
+            );
+        }
+
+        [Fact]
+        public void CanBFSCyclicGraphAsVertexList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "3 3\n1 2\n1 3\n2 3"
+            ));
+
+            var g = Graph.AsVertexList(scanner, directed: false);
+            var path = new List<int>();
+
+            GraphTraversal.BFS(g, g[0], (node) => path.Add(node.Index));
+
+            Assert.True(path.Count == 3);
+
+            Assert.True(
+                string.Join(",", path.Select(x => x.ToString())) ==
+                "0,1,2"
+            );
+        }
+
+        [Fact]
+        public void CanBFSAcyclicGraphWithBacktrackingAsVertexList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "7 6\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n"
+            ));
+
+            var g = Graph.AsVertexList(scanner, directed: false);
+            var path = new List<Tuple<int, int>>();
+            var explored = new List<Tuple<int, int>>();
+
+            GraphTraversal.BFS(g, g[0], 
+                (node, parent) => path.Add(new Tuple<int, int>(node.Index, parent.Index)), 
+                (node, parent) => explored.Add(new Tuple<int, int>(node.Index, parent.Index))
+            );
+
+            Assert.True(path.Count == 7);
+
+            Assert.True(
+                string.Join(",", path.Select(x => string.Format("({0},{1})", x.Item1, x.Item2))) ==
+                "(0,0),(1,1),(2,1),(3,3),(4,3),(5,4),(6,5)"
+            );
+
+            Assert.True(explored.Count == 3);
+
+            Assert.True(
+                string.Join(",", explored.Select(x => string.Format("({0},{1})", x.Item1, x.Item2))) ==
+                "(0,0),(2,2),(6,6)"
+            );
+        }
     }
 }
