@@ -23,7 +23,7 @@ This repository contains (I'm updating this list as I go):
       - Using adjacency matrix (iterative + recursive with backtracking);
 - Geometry:
   - Primitives (points, line segments);
-  - Find intersection: line segments;  
+  - Find intersection between two line segments;  
 
 # Contributing
 
