@@ -24,7 +24,7 @@ This repository contains (I'm updating this list as I go):
     - Breadth-first-search (BFS):
       - Using vertex set (iterative + recursive with backtracking);
       - Using adjacency matrix (iterative + recursive with backtracking);
-  - Dealing with vertex subsets:    
+  - Working with vertex subsets:    
     - Dijkstra's algorithm for finding minimum path from a given node;       
 - **Geometry**:
   - Primitives (points, line segments);
