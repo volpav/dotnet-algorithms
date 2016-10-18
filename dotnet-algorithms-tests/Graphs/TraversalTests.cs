@@ -294,5 +294,56 @@ namespace Tests.Graphs
                 "(0,0),(2,2),(6,6)"
             );
         }
+
+        [Fact]
+        public void CanComputeMinPathWithDijkstraAsAdjacencyList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "8 9\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n1 6\n5 8\n6 8"
+            ));
+
+            var g = Graph.AsAdjacencyList(scanner, directed: false);
+
+            var weights = Graph.ConstantWeights(g.Length, 1, g);
+
+            var minPath = GraphTraversal.Dijkstra(g, weights, 0);
+
+            Assert.True(minPath.Item1.Length == g.Length);
+            Assert.True(minPath.Item2.Length <= g.Length);
+
+            Assert.True(minPath.Item1[0] == 0);
+            Assert.True(minPath.Item1[1] == 1);
+            Assert.True(minPath.Item1[2] == 1);
+            Assert.True(minPath.Item1[3] == 2);
+            Assert.True(minPath.Item1[4] == 2);
+            Assert.True(minPath.Item1[5] == 1);
+            Assert.True(minPath.Item1[6] == 2);
+            Assert.True(minPath.Item1[7] == 2);
+        }
+
+        [Fact]
+        public void CanComputeMinPathWithDijkstraAsVertexList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "8 9\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n1 6\n5 8\n6 8"
+            ));
+
+            var g = Graph.AsVertexList(scanner, directed: false);
+            g = Graph.ConstantWeights(g, 1);
+
+            var minPath = GraphTraversal.Dijkstra(g, g[0]);
+
+            Assert.True(minPath.Item1.Length == g.Length);
+            Assert.True(minPath.Item2.Length <= g.Length);
+
+            Assert.True(minPath.Item1[0] == 0);
+            Assert.True(minPath.Item1[1] == 1);
+            Assert.True(minPath.Item1[2] == 1);
+            Assert.True(minPath.Item1[3] == 2);
+            Assert.True(minPath.Item1[4] == 2);
+            Assert.True(minPath.Item1[5] == 1);
+            Assert.True(minPath.Item1[6] == 2);
+            Assert.True(minPath.Item1[7] == 2);
+        }
     }
 }

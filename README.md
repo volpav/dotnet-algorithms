@@ -18,12 +18,13 @@ This repository contains (I'm updating this list as I go):
     - Adjacency matrix;
     - Adjacency list;
   - Graph traversal algorithms:
-    - DFS
+    - Depth-first-search (DFS):
       - Using vertex set (iterative + recursive with backtracking);
       - Using adjacency matrix (iterative + recursive with backtracking);
-    - BFS
+    - Breadth-first-search (BFS):
       - Using vertex set (iterative + recursive with backtracking);
       - Using adjacency matrix (iterative + recursive with backtracking);
+    - Dijkstra's algorithm for finding minimum path from a given node;       
 - **Geometry**:
   - Primitives (points, line segments);
   - Find intersection between two line segments;  

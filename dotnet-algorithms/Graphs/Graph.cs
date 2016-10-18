@@ -107,6 +107,82 @@ namespace Algorithms.Graphs
     public static class Graph
     {
         /// <summary>
+        /// Returns the matrix of constant weights according to the given graph.
+        /// </summary>
+        /// <param name="n">Number of vertices in a graph.</param>
+        /// <param name="weight">Weight.</param>
+        /// <param name="adjacencyList">Adjacency list. If no specified, assuming there's a link from each vertex to each vertex. Otherwise, the linkage will be respected in the weight matrix (0/[weight]).</param>
+        public static int[,] ConstantWeights(int n, int weight = 1, int[][] adjacencyList = null)
+        {
+            var weights = new int[n, n];
+
+            if (adjacencyList == null)
+            {
+                weights = GenerateFullWeights(n, weight);
+            }
+            else
+            {
+                for (var i = 0; i < adjacencyList.Length; i++)
+                {
+                    var edges = adjacencyList[i];
+
+                    for (var j = 0; j < edges.Length; j++)
+                    {
+                        weights[i, edges[j]] = weight;
+                    }
+                }
+            }
+
+            return weights;
+        }
+
+        /// <summary>
+        /// Modifies the given graph to assign constant weights to all the edges.
+        /// </summary>
+        /// <param name="vertexList">Vertices.</param>
+        /// <param name="weight">Weight.</param>
+        public static Vertex[] ConstantWeights(Vertex[] vertexList, int weight = 1)
+        {
+            foreach (var vertex in vertexList)
+            {
+                foreach (var edge in vertex.Edges)
+                {
+                    edge.Weight = weight;
+                }
+            }
+
+            return vertexList;
+        }
+
+        /// <summary>
+        /// Generates full weights.
+        /// </summary>
+        /// <param name="n">Number of vertices.</param>
+        /// <param name="weight">Weight.</param>
+        private static int[,] GenerateFullWeights(int n, int weight)
+        {
+            var weights = new int[n, n];
+
+            for (var i = 0; i < n; i++)
+            {
+                for (var j = 0; j < n; j++)
+                {
+                    if (i != j)
+                    {
+                        weights[i, j] = weight;
+                    }
+                    else
+                    {
+                        weights[i, j] = 0;                        
+                    }
+                    
+                }
+            }
+
+            return weights;
+        }
+
+        /// <summary>
         /// Returns an adjacency matrix using the given scanner as a data source.
         /// </summary>
         /// <param name="scanner">Scanner.</param>
