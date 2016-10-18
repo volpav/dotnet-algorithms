@@ -25,7 +25,7 @@ This repository contains (I'm updating this list as I go):
       - Using vertex set (iterative + recursive with backtracking);
       - Using adjacency matrix (iterative + recursive with backtracking);
   - Working with vertex subsets:    
-    - Dijkstra's algorithm for finding minimum path from a given node;       
+    - Dijkstra's algorithm for finding shortest path from a given node;       
 - **Geometry**:
   - Primitives (points, line segments);
   - Find intersection between two line segments;  
