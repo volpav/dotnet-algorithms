@@ -8,8 +8,11 @@ This repository contains a collection of algorithms and data structures written 
 
 This repository contains (I'm updating this list as I go):
 
-- High-performance input/output facade (taken from [Kattis website](https://open.kattis.com/help/csharp));
-- Graphs:
+- **I/O**: 
+  - High-performance input/output facade (taken from [Kattis website](https://open.kattis.com/help/csharp));
+- **Data structures**:
+  - Min-heap (priority queue);  
+- **Graphs**:
   - Convenient way of initializing (directed/undirected, weighted/unweighted) graph as:
     - Vertex set;
     - Adjacency matrix;
@@ -21,7 +24,7 @@ This repository contains (I'm updating this list as I go):
     - BFS
       - Using vertex set (iterative + recursive with backtracking);
       - Using adjacency matrix (iterative + recursive with backtracking);
-- Geometry:
+- **Geometry**:
   - Primitives (points, line segments);
   - Find intersection between two line segments;  
 
