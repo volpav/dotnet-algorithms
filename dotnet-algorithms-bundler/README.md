@@ -19,7 +19,7 @@ Run the CLI by issuing the following command:
     
     dotnet run dotnet-algorithms-bundler.dll 
         --include=io,dfs,dijkstra 
-        --output-to=./algo.cs
+        --output=./algo.cs
 
 The above will create `algo.cs` file in the current folder with the following algorithms included:
 
