@@ -30,6 +30,18 @@ This repository contains (I'm updating this list as I go):
   - Primitives (points, line segments);
   - Find intersection between two line segments;  
 
+# Compiling & Running Tests
+
+To compile the main project (`dotnet-algorithms`), clone this repository and the execute (being in the root folder):
+
+    cd dotnet-algorithms/
+    dotnet restore && dotnet build
+
+To run unit tests, execute (being in the root folder):
+
+    cd dotnet-algorithms-tests/
+    dotnet restore && dotnet test
+
 # Contributing
 
 It's as easy as "1-2-3":
