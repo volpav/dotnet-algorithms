@@ -35,12 +35,16 @@ This repository contains (I'm updating this list as I go):
 To compile the main project (`dotnet-algorithms`), clone this repository and the execute (being in the root folder):
 
     cd dotnet-algorithms/
-    dotnet restore && dotnet build
+
+    dotnet restore
+    dotnet build
 
 To run unit tests, execute (being in the root folder):
 
     cd dotnet-algorithms-tests/
-    dotnet restore && dotnet test
+    
+    dotnet restore
+    dotnet test
 
 # Contributing
 
