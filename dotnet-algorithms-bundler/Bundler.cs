@@ -64,35 +64,5 @@ namespace Algorithms.Bundler
                 }
             }
         }
-
-        /// <summary>
-        /// Removes comments from the given C# syntax tree.
-        /// </summary>
-        /// <param name="tree">Syntax tree to process.</param>
-        private SyntaxTree StripComments(SyntaxTree tree)
-        {
-            return CSharpSyntaxTree.Create(new CommentRemover().Visit(tree.GetRoot()) as CSharpSyntaxNode);
-        }
-
-        /// <summary>
-        /// Removes comments from the given syntax node.
-        /// </summary>
-        private class CommentRemover : CSharpSyntaxRewriter
-        {
-            /// <summary>
-            /// Visits the given syntax trivia.
-            /// </summary>
-            /// <param name="trivia">Trivia to visit.</param>
-            public override SyntaxTrivia VisitTrivia(SyntaxTrivia trivia)
-            {
-                if (trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || 
-                    trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
-                {
-                    return default(SyntaxTrivia);
-                }
-
-                return trivia;
-            }
-        }
     }
 }
