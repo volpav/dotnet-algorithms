@@ -507,5 +507,125 @@ namespace Algorithms.Graphs
     
             return new Tuple<int[], int[]>(distance, previous);
         }
+
+        /// <summary>
+        /// Computes minimum spanning tree of a given graph using Prim's algorithm.
+        /// </summary>
+        /// <param name="adjacencyList">Adjacency list.</param>
+        /// <param name="weights">Edge weights.</param>
+        /// <param name="start">Node to start from.</param>
+        /// <returns>A pair. First item - array representing a tree, second - total minimum weight.</returns>
+        public static Tuple<int[], int> MST(
+            int[][] adjacencyList, 
+            int[,] weights, 
+            int start)
+        {
+            var n = adjacencyList.Length;
+            var explored = new HashSet<Tuple<int, int>>();
+
+            int weight = 0, k = 0;
+            var tree = new int[n];
+
+            var queue = new MinHeap<Tuple<int, int>>((x, y) =>
+            {
+                return weights[x.Item1, x.Item2] - weights[y.Item1, y.Item2];
+            });
+
+            Action<int> addNeighbors = (u) =>
+            {
+                explored.Add(new Tuple<int, int>(u, u));
+
+                for (var i = 0; i < adjacencyList[u].Length; i++)
+                {
+                    var v = adjacencyList[u][i];
+
+                    var smaller = u < v ? u : v;
+                    var larger = u > v ? u : v;
+                    var key = new Tuple<int, int>(smaller, larger);
+
+                    if (!explored.Contains(key))
+                    {
+                        explored.Add(key);
+                        
+                        queue.Add(new Tuple<int, int>(u, v));
+                    }
+                }
+            };
+
+            addNeighbors(start);
+            tree[k++] = start;
+
+            while (k < n)
+            {
+                var u = queue.ExtractMin();
+
+                weight += weights[u.Item1, u.Item2];
+                tree[k++] = u.Item2;
+
+                addNeighbors(u.Item2);
+            }
+    
+            return new Tuple<int[], int>(tree, weight);
+        }
+
+        /// <summary>
+        /// Computes minimum spanning tree of a given graph using Prim's algorithm.
+        /// </summary>
+        /// <param name="vertexList">Vertex list.</param>
+        /// <param name="start">Node to start from.</param>
+        /// <returns>A pair. First item - array representing a tree, second - total minimum weight.</returns>
+        public static Tuple<int[], int> MST(
+            Vertex[] vertexList, 
+            Vertex start)
+        {
+            var n = vertexList.Length;
+            var explored = new HashSet<Tuple<int, int>>();
+
+            int weight = 0, k = 0;
+            var tree = new int[n];
+
+            var queue = new MinHeap<Edge>((x, y) =>
+            {
+                return (x.Weight ?? 0) - (y.Weight ?? 0);
+            });
+
+            Action<Vertex> addNeighbors = (node) =>
+            {
+                var u = node.Index;
+
+                explored.Add(new Tuple<int, int>(u, u));
+
+                foreach (var edge in node.Edges)
+                {
+                    var v = edge.ToVertex.Index;
+
+                    var smaller = u < v ? u : v;
+                    var larger = u > v ? u : v;
+                    var key = new Tuple<int, int>(smaller, larger);
+
+                    if (!explored.Contains(key))
+                    {
+                        explored.Add(key);
+                        
+                        queue.Add(edge);
+                    }
+                }
+            };
+
+            addNeighbors(start);
+            tree[k++] = start.Index;
+
+            while (k < n)
+            {
+                var u = queue.ExtractMin();
+
+                weight += (u.Weight ?? 0);
+                tree[k++] = u.ToVertex.Index;
+
+                addNeighbors(u.ToVertex);
+            }
+    
+            return new Tuple<int[], int>(tree, weight);
+        }
     }
 }

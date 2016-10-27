@@ -345,5 +345,48 @@ namespace Tests.Graphs
             Assert.True(minPath.Item1[6] == 2);
             Assert.True(minPath.Item1[7] == 2);
         }
+
+        [Fact]
+        public void CanComputeMSTAsAdjacencyList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "5 10\n1 2 24\n1 3 13\n1 4 13\n1 5 22\n2 3 22\n2 4 13\n2 5 13\n3 4 19\n3 5 14\n4 5 19"
+            ));
+
+            var weights = new int[5, 5];
+            var g = Graph.AsAdjacencyList(scanner, out weights, directed: false, weighted: true);
+
+            var mst = GraphTraversal.MST(g, weights, 0);
+
+            Assert.True(mst.Item1.Length == g.Length);
+            Assert.True(mst.Item2 == 52);
+
+            Assert.True(mst.Item1[0] == 0);
+            Assert.True(mst.Item1[1] == 2);
+            Assert.True(mst.Item1[2] == 3);
+            Assert.True(mst.Item1[3] == 1);
+            Assert.True(mst.Item1[4] == 4);
+        }
+
+        [Fact]
+        public void CanComputeMSTAsVertexList()
+        {
+            var scanner = new Scanner(CreateStream(
+                "5 10\n1 2 24\n1 3 13\n1 4 13\n1 5 22\n2 3 22\n2 4 13\n2 5 13\n3 4 19\n3 5 14\n4 5 19"
+            ));
+
+            var g = Graph.AsVertexList(scanner, directed: false, weighted: true);
+
+            var mst = GraphTraversal.MST(g, g[0]);
+
+            Assert.True(mst.Item1.Length == g.Length);
+            Assert.True(mst.Item2 == 52);
+
+            Assert.True(mst.Item1[0] == 0);
+            Assert.True(mst.Item1[1] == 2);
+            Assert.True(mst.Item1[2] == 3);
+            Assert.True(mst.Item1[3] == 1);
+            Assert.True(mst.Item1[4] == 4);
+        }
     }
 }

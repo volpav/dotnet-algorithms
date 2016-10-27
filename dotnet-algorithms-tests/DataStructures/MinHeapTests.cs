@@ -12,7 +12,7 @@ namespace Tests.DataStructures
         [Fact]
         public void CanReturnMinimumElements()
         {
-            var heap = new MinHeap<int>();
+            var heap = new MinHeap<int>((x, y) => x - y);
 
             heap.Add(5);
             heap.Add(3);
