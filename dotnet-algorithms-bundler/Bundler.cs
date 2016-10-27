@@ -1,10 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+
+using Algorithms.Bundler.Tasks.SourceCode;
 
 namespace Algorithms.Bundler
 {
@@ -42,7 +41,13 @@ namespace Algorithms.Bundler
             var trees = files.Select(file => CSharpSyntaxTree.ParseText(File.ReadAllText(file)));
 
             // Processing each tree.
-            var processedTrees = trees.Select(tree => StripComments(tree));
+            var processedTrees = trees.Select(tree =>
+            {
+                return SourceCodeRewriteTask.RewriteWithAll(tree, new SourceCodeRewriteTask[] {
+                    new RemoveCommentsTask(),
+                    new RemoveNamespacesTask()
+                });
+            });
         }
 
         /// <summary>

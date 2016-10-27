@@ -1,14 +1,12 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Algorithms.Bundler.Transformers
+namespace Algorithms.Bundler.Tasks.SourceCode
 {
     /// <summary>
     /// Removes comments from the given syntax node.
     /// </summary>
-    public class CommentRemoverTransformer : SourceTransformer
+    public class RemoveCommentsTask : SourceCodeRewriteTask
     {
         /// <summary>
         /// Visits the given syntax trivia.

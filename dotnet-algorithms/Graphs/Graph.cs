@@ -112,6 +112,8 @@ namespace Algorithms.Graphs
         /// <param name="n">Number of vertices in a graph.</param>
         /// <param name="weight">Weight.</param>
         /// <param name="adjacencyList">Adjacency list. If no specified, assuming there's a link from each vertex to each vertex. Otherwise, the linkage will be respected in the weight matrix (0/[weight]).</param>
+        /// <remarks>Alias: graphs/cw</remarks>
+        /// <seealso cref=""></seealso>
         public static int[,] ConstantWeights(int n, int weight = 1, int[][] adjacencyList = null)
         {
             var weights = new int[n, n];
