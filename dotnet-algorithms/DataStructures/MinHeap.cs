@@ -6,7 +6,7 @@ namespace Algorithms.DataStructures
     /// <summary>
     /// Represents a binary heap with support for extracting minimum values.
     /// </summary>
-    public class MinHeap<T> where T : IComparable<T>
+    public class MinHeap<T>
     {
         private readonly List<T> heap;
         private readonly Comparison<T> comparison;
@@ -18,11 +18,6 @@ namespace Algorithms.DataStructures
         {
             get { return heap.Count; }
         }
-
-        /// <summary>
-        /// Initializes a new instance of an object.
-        /// </summary>
-        public MinHeap() : this((x, y) => x.CompareTo(y)) { }
 
         /// <summary>
         /// Initializes a new instance of an object.
