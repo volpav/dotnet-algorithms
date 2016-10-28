@@ -1,7 +1,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Algorithms.Bundler.Tasks.SourceCode
+namespace Algorithms.Bundler.SourceCode
 {
     /// <summary>
     /// Removes comments from the given syntax node.

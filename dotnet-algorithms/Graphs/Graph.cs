@@ -113,7 +113,6 @@ namespace Algorithms.Graphs
         /// <param name="weight">Weight.</param>
         /// <param name="adjacencyList">Adjacency list. If no specified, assuming there's a link from each vertex to each vertex. Otherwise, the linkage will be respected in the weight matrix (0/[weight]).</param>
         /// <remarks>Alias: graphs/cw</remarks>
-        /// <seealso cref=""></seealso>
         public static int[,] ConstantWeights(int n, int weight = 1, int[][] adjacencyList = null)
         {
             var weights = new int[n, n];
@@ -143,6 +142,8 @@ namespace Algorithms.Graphs
         /// </summary>
         /// <param name="vertexList">Vertices.</param>
         /// <param name="weight">Weight.</param>
+        /// <remarks>Alias: graphs/cw-v</remarks>
+        /// <seealso cref="Algorithms.Graphs.Vertex" />
         public static Vertex[] ConstantWeights(Vertex[] vertexList, int weight = 1)
         {
             foreach (var vertex in vertexList)
@@ -191,6 +192,8 @@ namespace Algorithms.Graphs
         /// <param name="directed">Value indicating whether the graph is directed.</param>
         /// <param name="weighted">Value indicating whether the graph is weighted.</param>
         /// <returns>Adjacency matrix.</returns>
+        /// <remarks>Alias: graphs/create</remarks>
+        /// <seealso cref="Algorithms.IO.Scanner" />
         public static int[,] AsAdjacencyMatrix(Scanner scanner, bool directed = false, bool weighted = false)
         {
             // Reading out the number of nodes.
@@ -230,6 +233,8 @@ namespace Algorithms.Graphs
         /// <param name="scanner">Scanner.</param>
         /// <param name="directed">Value indicating whether the graph is directed.</param>
         /// <returns>Adjacency list.</returns>
+        /// <remarks>Alias: graphs/create</remarks>
+        /// <seealso cref="Algorithms.IO.Scanner" />
         public static int[][] AsAdjacencyList(Scanner scanner, bool directed = false)
         {
             int[,] weights = null;
@@ -245,6 +250,8 @@ namespace Algorithms.Graphs
         /// <param name="directed">Value indicating whether the graph is directed.</param>
         /// <param name="weighted">Value indicating whether the graph is weighted.</param>
         /// <returns>Adjacency list.</returns>
+        /// <remarks>Alias: graphs/create</remarks>
+        /// <seealso cref="Algorithms.IO.Scanner" />
         public static int[][] AsAdjacencyList(Scanner scanner, out int[,] weights, bool directed = false, bool weighted = false)
         {
             // Reading out the number of nodes.
@@ -300,6 +307,8 @@ namespace Algorithms.Graphs
         /// <param name="directed">Value indicating whether the graph is directed.</param>
         /// <param name="weighted">Value indicating whether the graph is weighted.</param>
         /// <returns>A set of vertices.</returns>
+        /// <remarks>Alias: graphs/create-v</remarks>
+        /// <seealso cref="Algorithms.IO.Scanner" />
         public static Vertex[] AsVertexList(Scanner scanner, bool directed = false, bool weighted = false)
         {
             // Reading out the number of nodes.

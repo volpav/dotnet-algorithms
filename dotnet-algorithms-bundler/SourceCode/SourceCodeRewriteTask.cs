@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Algorithms.Bundler.Tasks.SourceCode
+namespace Algorithms.Bundler.SourceCode
 {
     /// <summary>
     /// Represents source code rewrite task.

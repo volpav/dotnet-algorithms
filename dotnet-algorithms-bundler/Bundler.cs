@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 
-using Algorithms.Bundler.Tasks.SourceCode;
+using Algorithms.Bundler.SourceCode;
 
 namespace Algorithms.Bundler
 {

@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis;
 
-namespace Algorithms.Bundler.Tasks.SourceCode
+namespace Algorithms.Bundler.SourceCode
 {
     /// <summary>
     /// Removes namespaces from the given syntax node.
