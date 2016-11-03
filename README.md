@@ -11,7 +11,7 @@ This repository contains (I'm updating this list as I go):
 - **I/O**: 
   - High-performance input/output facade (taken from [Kattis website](https://open.kattis.com/help/csharp));
 - **Data structures**:
-  - Min-heap (priority queue);  
+  - Min-heap (priority queue), using `Comparison<T>` for custom ordering; 
 - **Graphs**:
   - Convenient way of initializing (directed/undirected, weighted/unweighted) graph as:
     - Vertex set;
@@ -24,19 +24,19 @@ This repository contains (I'm updating this list as I go):
     - Breadth-first-search (BFS):
       - Using vertex set (iterative + recursive with backtracking);
       - Using adjacency matrix (iterative + recursive with backtracking);
-  - Working with vertex subsets:    
+  - Working with vertex subsets: 
     - Dijkstra's algorithm for finding shortest path from a given node;
-    - Minimum Spanning Tree (MST), using Prim's algorithm;       
+    - Minimum Spanning Tree (MST), using Prim's algorithm;
 - **Searching**:
     - Binary search (generic method, requiring `IComparable<T>`);
 - **Sorting**:
     - Quick sort (generic method, requiring `IComparable<T>`);
     - Merge sort (generic method, requiring `IComparable<T>`);
 - **Strings**:
-    - Edit distance (no classification of operations);     
+    - Edit distance (simple case - no classification of operations);
 - **Geometry**:
   - Primitives (points, line segments);
-  - Find intersection between two line segments;  
+  - Find intersection between two line segments; 
 
 # Compiling & Running Tests
 
