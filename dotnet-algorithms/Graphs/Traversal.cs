@@ -6,27 +6,18 @@ using Algorithms.DataStructures;
 
 namespace Algorithms.Graphs
 {
-    /// <summary>
-    /// Contains graph traversal algorithms.
-    /// </summary>
     public static class GraphTraversal
     {
-        /// <summary>
-        /// Executes a depth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="adjacencyList">Adjacency list.</param>
-        /// <param name="start">Starting vertex.</param>
-        /// <param name="visitor">Vertex visitor.</param>
         public static void DFS(int[][] adjacencyList, int start, Action<int> visitor)
         {
-            var s = new Stack<int>();
-            var discoveredVertexIndicies = new HashSet<int>();
+            Stack<int> s = new Stack<int>();
+            HashSet<int> discoveredVertexIndicies = new HashSet<int>();
 
             s.Push(start);
 
             while (s.Count > 0)
             {
-                var current = s.Pop();
+                int current = s.Pop();
                 
                 if (!discoveredVertexIndicies.Contains(current))
                 {
@@ -34,10 +25,10 @@ namespace Algorithms.Graphs
 
                     visitor(current);
 
-                    var edges = adjacencyList[current];
-                    var totalEdges = edges.Length;
+                    int[] edges = adjacencyList[current];
+                    int totalEdges = edges.Length;
 
-                    for (var i = 0; i < totalEdges; i++)
+                    for (int i = 0; i < totalEdges; i++)
                     {
                         s.Push(edges[i]);
                     }
@@ -45,23 +36,17 @@ namespace Algorithms.Graphs
             }
         }
 
-        /// <summary>
-        /// Executes a depth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="vertices">Graph vertices.</param>
-        /// <param name="start">Starting vertex.</param>
-        /// <param name="visitor">Vertex visitor.</param>
         public static void DFS(Vertex[] vertices, Vertex start, Action<Vertex> visitor)
         {
-            var s = new Stack<Vertex>();
-            var discoveredVertexIndicies = new HashSet<int>();
+            Stack<Vertex> s = new Stack<Vertex>();
+            HashSet<int> discoveredVertexIndicies = new HashSet<int>();
 
             s.Push(start);
 
             while (s.Count > 0)
             {
-                var current = s.Pop();
-                var index = current.Index;
+                Vertex current = s.Pop();
+                int index = current.Index;
 
                 if (!discoveredVertexIndicies.Contains(index))
                 {
@@ -69,10 +54,10 @@ namespace Algorithms.Graphs
 
                     visitor(current);
 
-                    var edges = current.Edges;
-                    var totalEdges = edges.Count;
+                    IList<Edge> edges = current.Edges;
+                    int totalEdges = edges.Count;
 
-                    for (var i = 0; i < totalEdges; i++)
+                    for (int i = 0; i < totalEdges; i++)
                     {
                         s.Push(edges[i].ToVertex);
                     }
@@ -80,22 +65,16 @@ namespace Algorithms.Graphs
             }
         }
 
-        /// <summary>
-        /// Executes a breadth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="adjacencyList">Adjacency list.</param>
-        /// <param name="start">Starting vertex.</param>
-        /// <param name="visitor">Vertex visitor.</param>
         public static void BFS(int[][] adjacencyList, int start, Action<int> visitor)
         {
-            var s = new Queue<int>();
-            var discoveredVertexIndicies = new HashSet<int>();
+            Queue<int> s = new Queue<int>();
+            HashSet<int> discoveredVertexIndicies = new HashSet<int>();
 
             s.Enqueue(start);
 
             while (s.Count > 0)
             {
-                var current = s.Dequeue();
+                int current = s.Dequeue();
                 
                 if (!discoveredVertexIndicies.Contains(current))
                 {
@@ -103,10 +82,10 @@ namespace Algorithms.Graphs
 
                     visitor(current);
 
-                    var edges = adjacencyList[current];
-                    var totalEdges = edges.Length;
+                    int[] edges = adjacencyList[current];
+                    int totalEdges = edges.Length;
 
-                    for (var i = 0; i < totalEdges; i++)
+                    for (int i = 0; i < totalEdges; i++)
                     {
                         s.Enqueue(edges[i]);
                     }
@@ -114,23 +93,17 @@ namespace Algorithms.Graphs
             }
         }
 
-        /// <summary>
-        /// Executes a breadth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="vertices">Graph vertices.</param>
-        /// <param name="start">Starting vertex.</param>
-        /// <param name="visitor">Vertex visitor.</param>
         public static void BFS(Vertex[] vertices, Vertex start, Action<Vertex> visitor)
         {
-            var s = new Queue<Vertex>();
-            var discoveredVertexIndicies = new HashSet<int>();
+            Queue<Vertex> s = new Queue<Vertex>();
+            HashSet<int> discoveredVertexIndicies = new HashSet<int>();
 
             s.Enqueue(start);
 
             while (s.Count > 0)
             {
-                var current = s.Dequeue();
-                var index = current.Index;
+                Vertex current = s.Dequeue();
+                int index = current.Index;
 
                 if (!discoveredVertexIndicies.Contains(index))
                 {
@@ -138,10 +111,10 @@ namespace Algorithms.Graphs
 
                     visitor(current);
 
-                    var edges = current.Edges;
-                    var totalEdges = edges.Count;
+                    IList<Edge> edges = current.Edges;
+                    int totalEdges = edges.Count;
 
-                    for (var i = 0; i < totalEdges; i++)
+                    for (int i = 0; i < totalEdges; i++)
                     {
                         s.Enqueue(edges[i].ToVertex);
                     }
@@ -149,70 +122,34 @@ namespace Algorithms.Graphs
             }
         }
 
-        /// <summary>
-        /// Executes a recursive depth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="vertices">Vertices.</param>
-        /// <param name="start">Starting vertex.</param>
-        /// <param name="discoveredVisitor">Vertex visitor, once discovered (arguments are current vertex as well as vertex of origin).</param>
-        /// <param name="exploredVisitor">Vertex visitor, once fully explored (arguments are current vertex as well as vertex of origin).</param>
         public static void DFS(Vertex[] vertices, Vertex start, Action<Vertex, Vertex> discoveredVisitor, Action<Vertex, Vertex> exploredVisitor = null)
         {
             DFS(vertices, start.Index, start.Index, new HashSet<int>(), discoveredVisitor, exploredVisitor);
         }
 
-        /// <summary>
-        /// Executes a recursive depth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="adjacencyList">Adjacency list.</param>
-        /// <param name="start">Starting vertex.</param>
-        /// <param name="discoveredVisitor">Vertex visitor, once discovered (arguments are current vertex as well as vertex of origin).</param>
-        /// <param name="exploredVisitor">Vertex visitor, once fully explored (arguments are current vertex as well as vertex of origin).</param>
         public static void DFS(int[][] adjacencyList, int start, Action<int, int> discoveredVisitor, Action<int, int> exploredVisitor = null)
         {
             DFS(adjacencyList, start, start, new HashSet<int>(), discoveredVisitor, exploredVisitor);
         }
 
-        /// <summary>
-        /// Executes a recursive breadth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="vertices">Vertices.</param>
-        /// <param name="start">Starting vertex.</param>
-        /// <param name="discoveredVisitor">Vertex visitor, once discovered (arguments are current vertex as well as vertex of origin).</param>
-        /// <param name="exploredVisitor">Vertex visitor, once fully explored (arguments are current vertex as well as vertex of origin).</param>
         public static void BFS(Vertex[] vertices, Vertex start, Action<Vertex, Vertex> discoveredVisitor, Action<Vertex, Vertex> exploredVisitor = null)
         {
-            var level = new Queue<int>();
+            Queue<int> level = new Queue<int>();
 
             level.Enqueue(start.Index);
 
             BFS(vertices, level, new HashSet<int>(), discoveredVisitor, exploredVisitor);
         }
 
-        /// <summary>
-        /// Executes a recursive depth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="adjacencyList">Adjacency list.</param>
-        /// <param name="start">Starting vertex.</param>
-        /// <param name="discoveredVisitor">Vertex visitor, once discovered (arguments are current vertex as well as vertex of origin).</param>
-        /// <param name="exploredVisitor">Vertex visitor, once fully explored (arguments are current vertex as well as vertex of origin).</param>
         public static void BFS(int[][] adjacencyList, int start, Action<int, int> discoveredVisitor, Action<int, int> exploredVisitor = null)
         {
-            var level = new Queue<int>();
+            Queue<int> level = new Queue<int>();
 
             level.Enqueue(start);
 
             BFS(adjacencyList, level, new HashSet<int>(), discoveredVisitor, exploredVisitor);
         }
 
-        /// <summary>
-        /// Executes a recursive breadth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="vertices">Vertices.</param>
-        /// <param name="level">Level to explore.</param>
-        /// <param name="discoveredVertexIndicies">A set of all the discovered vertices.</param>
-        /// <param name="discoveredVisitor">Vertex visitor, once discovered (arguments are current vertex as well as vertex of origin).</param>
-        /// <param name="exploredVisitor">Vertex visitor, once fully explored (arguments are current vertex as well as vertex of origin).</param>
         private static void BFS(
             Vertex[] vertices,
             Queue<int> level,
@@ -233,12 +170,12 @@ namespace Algorithms.Graphs
                     discoveredVertexIndicies.Add(current);
                     discoveredVisitor(vertices[current], vertices[cf()]);
 
-                    var edges = vertices[current].Edges;
-                    var totalEdges = edges.Count;
+                    IList<Edge> edges = vertices[current].Edges;
+                    int totalEdges = edges.Count;
 
-                    for (var i = 0; i < totalEdges; i++)
+                    for (int i = 0; i < totalEdges; i++)
                     {
-                        var v = edges[i].ToVertex;
+                        Vertex v = edges[i].ToVertex;
 
                         if (!discoveredVertexIndicies.Contains(v.Index))
                         {
@@ -264,14 +201,6 @@ namespace Algorithms.Graphs
             }
         }
 
-        /// <summary>
-        /// Executes a recursive breadth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="adjacencyList">Adjacency list.</param>
-        /// <param name="level">Level to explore.</param>
-        /// <param name="discoveredVertexIndicies">A set of all the discovered vertices.</param>
-        /// <param name="discoveredVisitor">Vertex visitor, once discovered (arguments are current vertex as well as vertex of origin).</param>
-        /// <param name="exploredVisitor">Vertex visitor, once fully explored (arguments are current vertex as well as vertex of origin).</param>
         private static void BFS(
             int[][] adjacencyList, 
             Queue<int> level,
@@ -292,12 +221,12 @@ namespace Algorithms.Graphs
                     discoveredVertexIndicies.Add(current);
                     discoveredVisitor(current, cf());
 
-                    var edges = adjacencyList[current];
-                    var totalEdges = edges.Length;
+                    int[] edges = adjacencyList[current];
+                    int totalEdges = edges.Length;
 
-                    for (var i = 0; i < totalEdges; i++)
+                    for (int i = 0; i < totalEdges; i++)
                     {
-                        var v = edges[i];
+                        int v = edges[i];
 
                         if (!discoveredVertexIndicies.Contains(v))
                         {
@@ -323,15 +252,6 @@ namespace Algorithms.Graphs
             }
         }
 
-        /// <summary>
-        /// Executes a recursive depth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="vertices">Vertices.</param>
-        /// <param name="current">Current vertex index.</param>
-        /// <param name="cameFrom">Vertex index of the vertex coming from.</param>
-        /// <param name="discoveredVertexIndicies">A set of all the discovered vertices.</param>
-        /// <param name="discoveredVisitor">Vertex visitor, once discovered (arguments are current vertex as well as vertex of origin).</param>
-        /// <param name="exploredVisitor">Vertex visitor, once fully explored (arguments are current vertex as well as vertex of origin).</param>
         private static void DFS(
             Vertex[] vertices,
             int current,
@@ -346,10 +266,10 @@ namespace Algorithms.Graphs
 
                 discoveredVisitor(vertices[current], vertices[cameFrom]);
 
-                var edges = vertices[current].Edges;
-                var totalEdges = edges.Count;
+                IList<Edge> edges = vertices[current].Edges;
+                int totalEdges = edges.Count;
 
-                for (var i = 0; i < totalEdges; i++)
+                for (int i = 0; i < totalEdges; i++)
                 {
                     DFS(
                         vertices,
@@ -365,15 +285,6 @@ namespace Algorithms.Graphs
             }
         }
 
-        /// <summary>
-        /// Executes a recursive depth-first traversal of a given graph.
-        /// </summary>
-        /// <param name="adjacencyList">Adjacency list.</param>
-        /// <param name="current">Current vertex.</param>
-        /// <param name="cameFrom">Vertex coming from.</param>
-        /// <param name="discoveredVertexIndicies">A set of all the discovered vertices.</param>
-        /// <param name="discoveredVisitor">Vertex visitor, once discovered (arguments are current vertex as well as vertex of origin).</param>
-        /// <param name="exploredVisitor">Vertex visitor, once fully explored (arguments are current vertex as well as vertex of origin).</param>
         private static void DFS(
             int[][] adjacencyList, 
             int current,
@@ -388,10 +299,10 @@ namespace Algorithms.Graphs
 
                 discoveredVisitor(current, cameFrom);
 
-                var edges = adjacencyList[current];
-                var totalEdges = edges.Length;
+                int[] edges = adjacencyList[current];
+                int totalEdges = edges.Length;
 
-                for (var i = 0; i < totalEdges; i++)
+                for (int i = 0; i < totalEdges; i++)
                 {
                     DFS(
                         adjacencyList, 
@@ -407,26 +318,19 @@ namespace Algorithms.Graphs
             }
         }
 
-        /// <summary>
-        /// Executes non-recursive Dijkstra for finding out shortest path to all the notes of a given graph from a given node.
-        /// </summary>
-        /// <param name="adjacencyList">Adjacency list.</param>
-        /// <param name="weights">Edge weights.</param>
-        /// <param name="start">Node to find shortest paths from.</param>
-        /// <returns>A pair of arrays, first - containing shortest path costs to each of the nodes, second - parent nodes visited from a given node (for traceability of the path).</returns>
         public static Tuple<int[], int[]> Dijkstra(
             int[][] adjacencyList, 
             int[,] weights, 
             int start)
         {
-            var n = adjacencyList.Length;
-            var infinity = int.MaxValue - 1000;
+            int n = adjacencyList.Length;
+            int infinity = int.MaxValue - 1000;
     
-            var distance = new int[n];
-            var previous = new int[n];
-            var queue = new MinHeap<int>((x, y) => distance[x] - distance[y]);
+            int[] distance = new int[n];
+            int[] previous = new int[n];
+            MinHeap<int> queue = new MinHeap<int>((x, y) => distance[x] - distance[y]);
     
-            for (var i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
                 distance[i] = infinity;
                 previous[i] = -1;
@@ -438,12 +342,12 @@ namespace Algorithms.Graphs
     
             while (queue.Count > 0)
             {
-                var u = queue.PeekMin();
+                int u = queue.PeekMin();
     
-                for (var i = 0; i < adjacencyList[u].Length; i++)
+                for (int i = 0; i < adjacencyList[u].Length; i++)
                 {
-                    var v = adjacencyList[u][i];
-                    var newDistance = distance[u] + weights[u, v];
+                    int v = adjacencyList[u][i];
+                    int newDistance = distance[u] + weights[u, v];
     
                     if (newDistance < distance[v])
                     {
@@ -458,24 +362,18 @@ namespace Algorithms.Graphs
             return new Tuple<int[], int[]>(distance, previous);
         }
 
-        /// <summary>
-        /// Executes non-recursive Dijkstra for finding out shortest path to all the notes of a given graph from a given node.
-        /// </summary>
-        /// <param name="vertexList">Vertex list.</param>
-        /// <param name="start">Node to find shortest paths from.</param>
-        /// <returns>A pair of arrays, first - containing shortest path costs to each of the nodes, second - parent nodes visited from a given node (for traceability of the path).</returns>
         public static Tuple<int[], int[]> Dijkstra(
             Vertex[] vertexList, 
             Vertex start)
         {
-            var n = vertexList.Length;
-            var infinity = int.MaxValue - 1000;
+            int n = vertexList.Length;
+            int infinity = int.MaxValue - 1000;
     
-            var distance = new int[n];
-            var previous = new int[n];
-            var queue = new MinHeap<int>((x, y) => distance[x] - distance[y]);
+            int[] distance = new int[n];
+            int[] previous = new int[n];
+            MinHeap<int> queue = new MinHeap<int>((x, y) => distance[x] - distance[y]);
     
-            for (var i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
                 distance[i] = infinity;
                 previous[i] = -1;
@@ -487,13 +385,13 @@ namespace Algorithms.Graphs
     
             while (queue.Count > 0)
             {
-                var u = queue.PeekMin();
+                int u = queue.PeekMin();
     
-                foreach (var edge in vertexList[u].Edges)
+                foreach (Edge edge in vertexList[u].Edges)
                 {
-                    var v = edge.ToVertex.Index;
+                    int v = edge.ToVertex.Index;
 
-                    var newDistance = distance[u] + (edge.Weight != null ? edge.Weight.Value : 0);
+                    int newDistance = distance[u] + (edge.Weight != null ? edge.Weight.Value : 0);
     
                     if (newDistance < distance[v])
                     {
@@ -508,25 +406,18 @@ namespace Algorithms.Graphs
             return new Tuple<int[], int[]>(distance, previous);
         }
 
-        /// <summary>
-        /// Computes minimum spanning tree of a given graph using Prim's algorithm.
-        /// </summary>
-        /// <param name="adjacencyList">Adjacency list.</param>
-        /// <param name="weights">Edge weights.</param>
-        /// <param name="start">Node to start from.</param>
-        /// <returns>A pair. First item - array representing a tree, second - total minimum weight.</returns>
         public static Tuple<int[], int> MST(
             int[][] adjacencyList, 
             int[,] weights, 
             int start)
         {
-            var n = adjacencyList.Length;
-            var explored = new HashSet<Tuple<int, int>>();
+            int n = adjacencyList.Length;
+            HashSet<Tuple<int, int>> explored = new HashSet<Tuple<int, int>>();
 
             int weight = 0, k = 0;
-            var tree = new int[n];
+            int[] tree = new int[n];
 
-            var queue = new MinHeap<Tuple<int, int>>((x, y) =>
+            MinHeap<Tuple<int, int>> queue = new MinHeap<Tuple<int, int>>((x, y) =>
             {
                 return weights[x.Item1, x.Item2] - weights[y.Item1, y.Item2];
             });
@@ -535,13 +426,13 @@ namespace Algorithms.Graphs
             {
                 explored.Add(new Tuple<int, int>(u, u));
 
-                for (var i = 0; i < adjacencyList[u].Length; i++)
+                for (int i = 0; i < adjacencyList[u].Length; i++)
                 {
-                    var v = adjacencyList[u][i];
+                    int v = adjacencyList[u][i];
 
-                    var smaller = u < v ? u : v;
-                    var larger = u > v ? u : v;
-                    var key = new Tuple<int, int>(smaller, larger);
+                    int smaller = u < v ? u : v;
+                    int larger = u > v ? u : v;
+                    Tuple<int, int> key = new Tuple<int, int>(smaller, larger);
 
                     if (!explored.Contains(key))
                     {
@@ -557,7 +448,7 @@ namespace Algorithms.Graphs
 
             while (k < n)
             {
-                var u = queue.ExtractMin();
+                Tuple<int, int> u = queue.ExtractMin();
 
                 weight += weights[u.Item1, u.Item2];
                 tree[k++] = u.Item2;
@@ -568,40 +459,34 @@ namespace Algorithms.Graphs
             return new Tuple<int[], int>(tree, weight);
         }
 
-        /// <summary>
-        /// Computes minimum spanning tree of a given graph using Prim's algorithm.
-        /// </summary>
-        /// <param name="vertexList">Vertex list.</param>
-        /// <param name="start">Node to start from.</param>
-        /// <returns>A pair. First item - array representing a tree, second - total minimum weight.</returns>
         public static Tuple<int[], int> MST(
             Vertex[] vertexList, 
             Vertex start)
         {
-            var n = vertexList.Length;
-            var explored = new HashSet<Tuple<int, int>>();
+            int n = vertexList.Length;
+            HashSet<Tuple<int, int>> explored = new HashSet<Tuple<int, int>>();
 
             int weight = 0, k = 0;
-            var tree = new int[n];
+            int[] tree = new int[n];
 
-            var queue = new MinHeap<Edge>((x, y) =>
+            MinHeap<Edge> queue = new MinHeap<Edge>((x, y) =>
             {
                 return (x.Weight ?? 0) - (y.Weight ?? 0);
             });
 
             Action<Vertex> addNeighbors = (node) =>
             {
-                var u = node.Index;
+                int u = node.Index;
 
                 explored.Add(new Tuple<int, int>(u, u));
 
-                foreach (var edge in node.Edges)
+                foreach (Edge edge in node.Edges)
                 {
-                    var v = edge.ToVertex.Index;
+                    int v = edge.ToVertex.Index;
 
-                    var smaller = u < v ? u : v;
-                    var larger = u > v ? u : v;
-                    var key = new Tuple<int, int>(smaller, larger);
+                    int smaller = u < v ? u : v;
+                    int larger = u > v ? u : v;
+                    Tuple<int, int> key = new Tuple<int, int>(smaller, larger);
 
                     if (!explored.Contains(key))
                     {
@@ -617,7 +502,7 @@ namespace Algorithms.Graphs
 
             while (k < n)
             {
-                var u = queue.ExtractMin();
+                Edge u = queue.ExtractMin();
 
                 weight += (u.Weight ?? 0);
                 tree[k++] = u.ToVertex.Index;

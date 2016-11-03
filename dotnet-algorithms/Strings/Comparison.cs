@@ -1,16 +1,7 @@
 namespace Algorithms.Strings
 {
-    /// <summary>
-    /// Contains comparison-related string algorithms.
-    /// </summary>
     public static class StringComparison
     {
-        /// <summary>
-        /// Calculates edit distance (no classification of operations) between the two given strings.
-        /// </summary>
-        /// <param name="str1">First string.</param>
-        /// <param name="str2">Second string.</param>
-        /// <remarks>Alias: strings/comparison/ed, edit-distance</remarks>
         public static int EditDistance(string str1, string str2)
         {
             if (str1 == null)
