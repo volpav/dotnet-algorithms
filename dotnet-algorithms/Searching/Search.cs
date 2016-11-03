@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Algorithms.Search
+namespace Algorithms.Searching
 {
     /// <summary>
     /// Contains search-related algorithms.
@@ -15,7 +15,7 @@ namespace Algorithms.Search
         /// <param name="item">Item to search for.</param>
         /// <returns>Zero-based index for an item, if found. Otherwise, -1.</returns>
         /// <exception cref="System.ArgumentNullException">Occurs when item set is null.</exception>
-        /// <remarks>Alias: search/bc, binary-search</remarks>
+        /// <remarks>Alias: searching/bs, binary-search</remarks>
         public static int BinarySearch<T>(T[] items, T item) where T: IComparable<T>
         {
             if (items == null) throw new ArgumentNullException("items");

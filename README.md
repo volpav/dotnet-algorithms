@@ -27,8 +27,13 @@ This repository contains (I'm updating this list as I go):
   - Working with vertex subsets:    
     - Dijkstra's algorithm for finding shortest path from a given node;
     - Minimum Spanning Tree (MST), using Prim's algorithm;       
-- **Search**:
-    - Binary search;
+- **Searching**:
+    - Binary search (generic method, requiring `IComparable<T>`);
+- **Sorting**:
+    - Quick sort (generic method, requiring `IComparable<T>`);
+    - Merge sort (generic method, requiring `IComparable<T>`);
+- **Strings**:
+    - Edit distance (no classification of operations);     
 - **Geometry**:
   - Primitives (points, line segments);
   - Find intersection between two line segments;  
