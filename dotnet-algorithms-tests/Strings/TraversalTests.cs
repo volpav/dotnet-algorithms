@@ -4,14 +4,14 @@ using Algorithms.Strings;
 
 namespace Tests.Strings
 {
-    public class ComparisonTests : TestBase
+    public class TraversalTests : TestBase
     {
         private const string arbString = "arbString";
 
         [Fact]
         public void CanHandleNullStringsForEditDistance()
         {
-            int dist = StringComparison.EditDistance(null, null);
+            int dist = StringTraversal.EditDistance(null, null);
 
             Assert.True(dist == 0);
         }
@@ -19,7 +19,7 @@ namespace Tests.Strings
         [Fact]
         public void CanHandleNullLeftStringForEditDistance()
         {
-            int dist = StringComparison.EditDistance(null, arbString);
+            int dist = StringTraversal.EditDistance(null, arbString);
 
             Assert.True(dist == arbString.Length);
         }
@@ -27,7 +27,7 @@ namespace Tests.Strings
         [Fact]
         public void CanHandleNullRightStringForEditDistance()
         {
-            int dist = StringComparison.EditDistance(arbString, null);
+            int dist = StringTraversal.EditDistance(arbString, null);
 
             Assert.True(dist == arbString.Length);
         }
@@ -35,7 +35,7 @@ namespace Tests.Strings
         [Fact]
         public void ReturnsNoDistanceForEqualStringsForEditDistance()
         {
-            int dist = StringComparison.EditDistance(arbString, arbString);
+            int dist = StringTraversal.EditDistance(arbString, arbString);
 
             Assert.True(dist == 0);
         }
@@ -45,16 +45,16 @@ namespace Tests.Strings
         {
             int dist = 0;
 
-            dist = StringComparison.EditDistance("hello", "hallo");
+            dist = StringTraversal.EditDistance("hello", "hallo");
             Assert.True(dist == 1);
 
-            dist = StringComparison.EditDistance("hello", "aeloo");
+            dist = StringTraversal.EditDistance("hello", "aeloo");
             Assert.True(dist == 2);
 
-            dist = StringComparison.EditDistance("hello", "ehoao");
+            dist = StringTraversal.EditDistance("hello", "ehoao");
             Assert.True(dist == 4);
 
-            dist = StringComparison.EditDistance("hello", "ehlo");
+            dist = StringTraversal.EditDistance("hello", "ehlo");
             Assert.True(dist == 2);
         }
     }

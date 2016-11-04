@@ -1,6 +1,6 @@
 namespace Algorithms.Strings
 {
-    public static class StringComparison
+    public static class StringTraversal
     {
         public static int EditDistance(string str1, string str2)
         {

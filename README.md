@@ -36,7 +36,10 @@ This repository contains (I'm updating this list as I go):
     - Edit distance (simple case - no classification of operations);
 - **Geometry**:
   - Primitives (points, line segments);
-  - Find intersection between two line segments; 
+  - Find intersection between two line segments;
+  - Convex hull;
+- **Miscellaneous**:
+    - Longest increasing subsequence length (generic method, requiring `IComparable<T>`); 
 
 # Compiling & Running Tests
 
