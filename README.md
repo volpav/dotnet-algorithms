@@ -34,6 +34,7 @@ This repository contains (I'm updating this list as I go):
     - Merge sort (generic method, requiring `IComparable<T>`);
 - **Strings**:
     - Edit distance (simple case - no classification of operations);
+    - Hashing - Rabin-Karp rolling hash (with/without randomized coefficients);
 - **Geometry**:
   - Primitives (points, line segments);
   - Find intersection between two line segments;
