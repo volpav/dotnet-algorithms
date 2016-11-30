@@ -26,6 +26,7 @@ This repository contains (I'm updating this list as I go):
       - Using adjacency matrix (iterative + recursive with backtracking);
   - Working with vertex subsets: 
     - Dijkstra's algorithm for finding shortest path from a given node;
+    - Shortest Path Faster Algorithm (SPFA) for finding shortest path from a given node;
     - Minimum Spanning Tree (MST), using Prim's algorithm;
 - **Searching**:
     - Binary search (generic method, requiring `IComparable<T>`);

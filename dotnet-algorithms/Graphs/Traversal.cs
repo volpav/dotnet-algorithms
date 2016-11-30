@@ -8,6 +8,8 @@ namespace Algorithms.Graphs
 {
     public static class GraphTraversal
     {
+        public static readonly int Infinity = int.MaxValue;
+
         public static void DFS(int[][] adjacencyList, int start, Action<int> visitor)
         {
             Stack<int> s = new Stack<int>();
@@ -324,7 +326,6 @@ namespace Algorithms.Graphs
             int start)
         {
             int n = adjacencyList.Length;
-            int infinity = int.MaxValue - 1000;
     
             int[] distance = new int[n];
             int[] previous = new int[n];
@@ -332,7 +333,7 @@ namespace Algorithms.Graphs
     
             for (int i = 0; i < n; i++)
             {
-                distance[i] = infinity;
+                distance[i] = Infinity;
                 previous[i] = -1;
             }
     
@@ -342,7 +343,7 @@ namespace Algorithms.Graphs
     
             while (queue.Count > 0)
             {
-                int u = queue.PeekMin();
+                int u = queue.ExtractMin();
     
                 for (int i = 0; i < adjacencyList[u].Length; i++)
                 {
@@ -353,10 +354,10 @@ namespace Algorithms.Graphs
                     {
                         distance[v] = newDistance;
                         previous[v] = u;
+
+                        queue.Reprioritize(v);
                     }
                 }
-    
-                queue.ExtractMin();
             }
     
             return new Tuple<int[], int[]>(distance, previous);
@@ -367,7 +368,6 @@ namespace Algorithms.Graphs
             Vertex start)
         {
             int n = vertexList.Length;
-            int infinity = int.MaxValue - 1000;
     
             int[] distance = new int[n];
             int[] previous = new int[n];
@@ -375,7 +375,7 @@ namespace Algorithms.Graphs
     
             for (int i = 0; i < n; i++)
             {
-                distance[i] = infinity;
+                distance[i] = Infinity;
                 previous[i] = -1;
             }
     
@@ -385,7 +385,7 @@ namespace Algorithms.Graphs
     
             while (queue.Count > 0)
             {
-                int u = queue.PeekMin();
+                int u = queue.ExtractMin();
     
                 foreach (Edge edge in vertexList[u].Edges)
                 {
@@ -397,12 +397,104 @@ namespace Algorithms.Graphs
                     {
                         distance[v] = newDistance;
                         previous[v] = u;
+
+                        queue.Reprioritize(v);
                     }
                 }
-    
-                queue.ExtractMin();
             }
     
+            return new Tuple<int[], int[]>(distance, previous);
+        }
+
+        public static Tuple<int[], int[]> SPFA(
+            int[][] adjacencyList, 
+            int[,] weights, 
+            int start)
+        {
+            int n = adjacencyList.Length;
+
+            int[] distance = new int[n];
+            int[] previous = new int[n];
+        
+            Queue<int> queue = new Queue<int>();
+        
+            queue.Enqueue(start);
+
+            for (int i = 0; i < n; i++)
+            {
+                distance[i] = Infinity;
+                previous[i] = -1;
+            }
+
+            distance[start] = 0;
+
+            while (queue.Count > 0)
+            {
+                int u = queue.Dequeue();
+
+                for (int i = 0; i < adjacencyList[u].Length; i++)
+                {
+                    
+                    int v = adjacencyList[u][i];
+                    int w = weights[u, v];
+
+                    int newDistance = distance[u] + 1;
+
+                    if (distance[v] > newDistance)
+                    {
+                        distance[v] = newDistance;
+                        previous[v] = u;
+
+                        queue.Enqueue(v);
+                    }
+                }
+            }
+
+            return new Tuple<int[], int[]>(distance, previous);
+        }
+
+        public static Tuple<int[], int[]> SPFA(
+            Vertex[] vertexList, 
+            Vertex start)
+        {
+            int n = vertexList.Length;
+
+            int[] distance = new int[n];
+            int[] previous = new int[n];
+        
+            Queue<int> queue = new Queue<int>();
+        
+            queue.Enqueue(start.Index);
+
+            for (int i = 0; i < n; i++)
+            {
+                distance[i] = Infinity;
+                previous[i] = -1;
+            }
+
+            distance[start.Index] = 0;
+
+            while (queue.Count > 0)
+            {
+                int u = queue.Dequeue();
+
+                foreach (Edge edge in vertexList[u].Edges)
+                {
+                    int v = edge.ToVertex.Index;
+                    int w = edge.Weight != null ? edge.Weight.Value : 0;
+
+                    int newDistance = distance[u] + w;
+
+                    if (distance[v] > newDistance)
+                    {
+                        distance[v] = newDistance;
+                        previous[v] = u;
+
+                        queue.Enqueue(v);
+                    }
+                }
+            }
+
             return new Tuple<int[], int[]>(distance, previous);
         }
 

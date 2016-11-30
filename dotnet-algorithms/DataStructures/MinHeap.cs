@@ -7,6 +7,7 @@ namespace Algorithms.DataStructures
     {
         private readonly List<T> _heap;
         private readonly Comparison<T> _comparison;
+        private readonly Dictionary<T, int> _itemLocation;
 
         public int Count
         {
@@ -17,29 +18,31 @@ namespace Algorithms.DataStructures
         {
             _heap = new List<T>();
             _comparison = comparison;
+            _itemLocation = new Dictionary<T, int>();
         }
 
         public void Add(T item)
         {
-            _heap.Add(item);
+            AddItem(item);
 
             int i = _heap.Count - 1;
 
             while (i > 0)
             {
-                int j = (i + 1) / 2 - 1;
+                int parent = (i - 1) / 2;
 
-                T k = _heap[j];
-                int res = _comparison(k, _heap[i]);
+                if (parent < 0)
+                {
+                    parent = 0;
+                }
 
-                if (res <= 0)
+                if (_comparison(_heap[parent], _heap[i]) <= 0)
                 {
                     break;
                 }
 
-                Swap(i, j);
-
-                i = j;
+                SwapItems(i, parent);
+                i = parent;
             }
         }
 
@@ -48,7 +51,7 @@ namespace Algorithms.DataStructures
             foreach (T item in items)
             {
                 Add(item);
-            } 
+            }
         }
 
         public T PeekMin()
@@ -60,49 +63,99 @@ namespace Algorithms.DataStructures
 
             return _heap[0];
         }
-        
+
         public T ExtractMin()
         {
             if (_heap.Count == 0)
             {
                 throw new InvalidOperationException("Empty heap.");
             }
-            
-            int i = _heap.Count - 1;
+
             T min = _heap[0];
 
-            _heap[0] = _heap[i];
-            _heap.RemoveAt(i);
+            SwapItems(0, _heap.Count - 1);
+            RemoveLastItem();
 
-            HeapifyAdd(0);
+            Heapify(0);
 
             return min;
         }
 
-        private void HeapifyAdd(int n)
+        public void Reprioritize(T item)
         {
-            int smallest;
-            int l = 2 * (n + 1) - 1;
-            int r = 2 * (n + 1) - 1 + 1;
-            
-            if (l < _heap.Count && (_comparison(_heap[l], _heap[n]) <= 0)) smallest = l;
-            else smallest = n;
-            
-            if (r < _heap.Count && (_comparison(_heap[r], _heap[smallest]) <= 0)) smallest = r;
-            
-            if (smallest != n)
+            if (_itemLocation.ContainsKey(item))
             {
-                Swap(n, smallest);
-                
-                HeapifyAdd(smallest);
+                int index = _itemLocation[item];
+
+                if (index >= 0)
+                {
+                    int parent = (index - 1) / 2;
+
+                    if (parent < 0)
+                    {
+                        parent = 0;
+                    }
+
+                    Heapify(parent);
+                }
             }
         }
 
-        private void Swap(int i, int j)
+        private void Heapify(int n)
+        {
+            int smallest = n;
+            int l = 2 * n + 1;
+            int r = 2 * n + 2;
+            bool leftMatch = false, rightMatch = false;
+
+            if (l < _heap.Count && (_comparison(_heap[l], _heap[smallest]) <= 0))
+            {
+                smallest = l;
+                leftMatch = true;
+            }
+
+            if (r < _heap.Count && (_comparison(_heap[r], _heap[smallest]) <= 0))
+            {
+                smallest = r;
+                rightMatch = true;
+            }
+
+            if (smallest != n)
+            {
+                if (leftMatch && rightMatch)
+                {
+                    smallest = _comparison(_heap[l], _heap[r]) < 0 ? l : r;
+                }
+
+                SwapItems(n, smallest);
+                Heapify(smallest);
+            }
+        }
+
+        private void AddItem(T item)
+        {
+            _heap.Add(item);
+            _itemLocation.Add(item, _heap.Count - 1);
+        }
+
+        private void RemoveLastItem()
+        {
+            int index = _heap.Count - 1;
+            T last = _heap[index];
+
+            _itemLocation.Remove(last);
+            _heap.RemoveAt(index);
+        }
+
+        private void SwapItems(int i, int j)
         {
             T temp = _heap[i];
             _heap[i] = _heap[j];
             _heap[j] = temp;
+
+            int tempIndex = _itemLocation[_heap[i]];
+            _itemLocation[_heap[i]] = _itemLocation[_heap[j]];
+            _itemLocation[_heap[j]] = tempIndex;
         }
     }
 }
