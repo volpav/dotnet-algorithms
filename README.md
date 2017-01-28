@@ -28,6 +28,10 @@ This repository contains (I'm updating this list as I go):
     - Dijkstra's algorithm for finding shortest path from a given node;
     - Shortest Path Faster Algorithm (SPFA) for finding shortest path from a given node;
     - Minimum Spanning Tree (MST), using Prim's algorithm;
+- **Trees**:
+  - Binary trees:
+    - Convenient way of initializing a tree from an array of values;
+    - Pre-order, in-order and post-order traversals;
 - **Searching**:
     - Binary search (generic method, requiring `IComparable<T>`);
 - **Sorting**:

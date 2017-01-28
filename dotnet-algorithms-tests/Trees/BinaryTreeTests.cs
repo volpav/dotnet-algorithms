@@ -29,7 +29,7 @@ namespace Tests.Trees
         [Fact]
         public void CreateShouldHandleEmptyArray()
         {
-Exception error = null;
+            Exception error = null;
             BinaryTreeNode<int> tree = null;
 
             try 
