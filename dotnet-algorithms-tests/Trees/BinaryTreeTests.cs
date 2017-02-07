@@ -21,7 +21,7 @@ namespace Tests.Trees
             {
                 error = ex;
             }
-            
+
             Assert.True(error == null);
             Assert.True(tree == null);
         }
@@ -40,7 +40,7 @@ namespace Tests.Trees
             {
                 error = ex;
             }
-            
+
             Assert.True(error == null);
             Assert.True(tree == null);
         }
